@@ -66,7 +66,7 @@ class HistoryDownloader:
         soup = BeautifulSoup(html, "html.parser")
         tables = soup.find_all('table', {'class':'auto-style1'})
 
-        for table in tables:
+        for idx, table in enumerate(tables):
             content = table.find_all('td')
             # 將內容改成3-tuple, date/number/space, 並跳過第一欄說明欄
             # [content[3:] => 從第四個元素開始
@@ -75,8 +75,10 @@ class HistoryDownloader:
                 periodNum = 3
             else:
                 periodNum = 2
-
-            content = zip(*[content[periodNum:][i::periodNum] for i in range(periodNum)])
+            if (idx == 0):
+                content = zip(*[content[periodNum:][i::periodNum] for i in range(periodNum)])
+            else:
+                content = zip(*[content[:][i::periodNum] for i in range(periodNum)])
 
             for result in content:
                 date = result[0].text

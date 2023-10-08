@@ -72,6 +72,6 @@ class Lottery:
 if __name__ == "__main__":
     LoType = downloader.STR_LOT649
     # LoType = downloader.STR_LOT539
-    # HisDownloder = downloader.HistoryDownloader(LoType=LoType)
+    HisDownloder = downloader.HistoryDownloader(LoType=LoType)
     Lottery = Lottery(LoType)
     Lottery.dfs_all_numbers([], 0)
